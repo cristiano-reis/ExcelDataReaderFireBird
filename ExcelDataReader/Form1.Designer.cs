@@ -30,7 +30,10 @@ namespace ExcelDataReader
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtArquivo = new System.Windows.Forms.TextBox();
             this.btnServidor = new System.Windows.Forms.Button();
             this.btnArquivo = new System.Windows.Forms.Button();
@@ -38,8 +41,6 @@ namespace ExcelDataReader
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.lbRegistros = new System.Windows.Forms.Label();
             this.lbContador = new System.Windows.Forms.Label();
-            this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,6 +57,23 @@ namespace ExcelDataReader
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(357, 149);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // Column0
+            // 
+            this.Column0.DataPropertyName = "Column0";
+            this.Column0.HeaderText = "Ean";
+            this.Column0.Name = "Column0";
+            this.Column0.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.DataPropertyName = "Column1";
+            dataGridViewCellStyle1.Format = "N5";
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column1.HeaderText = "Custo";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // txtArquivo
             // 
@@ -128,23 +146,6 @@ namespace ExcelDataReader
             this.lbContador.TabIndex = 10;
             this.lbContador.Text = "0";
             // 
-            // Column0
-            // 
-            this.Column0.DataPropertyName = "Column0";
-            this.Column0.HeaderText = "Ean";
-            this.Column0.Name = "Column0";
-            this.Column0.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.DataPropertyName = "Column1";
-            dataGridViewCellStyle1.Format = "N5";
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column1.HeaderText = "Custo";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,6 +158,7 @@ namespace ExcelDataReader
             this.Controls.Add(this.btnServidor);
             this.Controls.Add(this.txtArquivo);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";

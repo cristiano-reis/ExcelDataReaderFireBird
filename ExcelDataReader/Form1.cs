@@ -75,6 +75,7 @@ namespace ExcelDataReader
             string ean = "";
             string sql = "";
             string sql2 = "";
+            string sql3 = "";
             if (dataGridView1.RowCount ==0)
             {
                 MessageBox.Show("Escolha um arquivo em excel para  atualizar!");
@@ -97,15 +98,22 @@ namespace ExcelDataReader
 
                      sql2 = " UPDATE PRODUTO P  SET P.CUSTO = '" + custo.ToString("N5").Replace(",", ".") + "' WHERE P.ID = '" + id +"'";
                     DB.ExecutarSQL(sql2);
-
+                    sql3 = "SELECT P.ID,P.REFERENCIA, P.CUSTO,P.DESCRICAO, B.CODIGO_BARRA FROM PRODUTO P"+
+                           " INNER JOIN PRODUTO_CODIGO_BARRA B ON P.ID= B.FK_PRODUTO"+
+                           " WHERE P.ID='" + id +"'";
                 }
                 if (cont == dataGridView1.Rows.Count)
                     MessageBox.Show("Concluido");
             }
             catch (Exception ex)
             {
+
                 FrmError error = new FrmError();
-                error.txtError.Text = "Linha no arquivo excel:\n\r"+ cont + "\n\rcomando 1:\n\r" +sql +"\n\rcomando 2:" +sql2+"\n\r\n\r"+ex.Message;
+                error.txtError.Text = "Linha no arquivo excel:\n\r"+ cont +
+                    "\n\rcomando 1:\n\r" +sql +
+                    "\n\rcomando 2:\n\r" + sql2+
+                    "\n\rcomando 3:\n\r" + sql3 +
+                    "\n\r\n\r" +ex.Message;
                 error.ShowDialog();
               
             }   
