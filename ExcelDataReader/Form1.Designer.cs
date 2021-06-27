@@ -29,12 +29,15 @@ namespace ExcelDataReader
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txtArquivo = new System.Windows.Forms.TextBox();
             this.btnServidor = new System.Windows.Forms.Button();
             this.btnArquivo = new System.Windows.Forms.Button();
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.lbRegistros = new System.Windows.Forms.Label();
+            this.lbContador = new System.Windows.Forms.Label();
             this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -81,7 +84,7 @@ namespace ExcelDataReader
             this.btnArquivo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnArquivo.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnArquivo.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnArquivo.Location = new System.Drawing.Point(375, 46);
+            this.btnArquivo.Location = new System.Drawing.Point(108, 12);
             this.btnArquivo.Name = "btnArquivo";
             this.btnArquivo.Size = new System.Drawing.Size(90, 29);
             this.btnArquivo.TabIndex = 7;
@@ -95,7 +98,7 @@ namespace ExcelDataReader
             this.btnAtualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAtualizar.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAtualizar.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnAtualizar.Location = new System.Drawing.Point(375, 81);
+            this.btnAtualizar.Location = new System.Drawing.Point(204, 12);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(90, 29);
             this.btnAtualizar.TabIndex = 7;
@@ -106,6 +109,24 @@ namespace ExcelDataReader
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // lbRegistros
+            // 
+            this.lbRegistros.AutoSize = true;
+            this.lbRegistros.Location = new System.Drawing.Point(300, 12);
+            this.lbRegistros.Name = "lbRegistros";
+            this.lbRegistros.Size = new System.Drawing.Size(41, 13);
+            this.lbRegistros.TabIndex = 8;
+            this.lbRegistros.Text = "Linhas:";
+            // 
+            // lbContador
+            // 
+            this.lbContador.AutoSize = true;
+            this.lbContador.Location = new System.Drawing.Point(300, 28);
+            this.lbContador.Name = "lbContador";
+            this.lbContador.Size = new System.Drawing.Size(13, 13);
+            this.lbContador.TabIndex = 10;
+            this.lbContador.Text = "0";
             // 
             // Column0
             // 
@@ -118,6 +139,8 @@ namespace ExcelDataReader
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column1.DataPropertyName = "Column1";
+            dataGridViewCellStyle1.Format = "N5";
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column1.HeaderText = "Custo";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -126,7 +149,9 @@ namespace ExcelDataReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 235);
+            this.ClientSize = new System.Drawing.Size(389, 235);
+            this.Controls.Add(this.lbContador);
+            this.Controls.Add(this.lbRegistros);
             this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.btnArquivo);
             this.Controls.Add(this.btnServidor);
@@ -152,6 +177,8 @@ namespace ExcelDataReader
         private System.Windows.Forms.Button btnArquivo;
         private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label lbRegistros;
+        private System.Windows.Forms.Label lbContador;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }

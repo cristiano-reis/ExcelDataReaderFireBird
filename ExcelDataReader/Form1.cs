@@ -20,16 +20,26 @@ namespace ExcelDataReader
 
         public void ExcelFileReader(string path)
         {
-            
-
-            var stream = File.Open(path, FileMode.Open, FileAccess.Read);
-            var reader = ExcelReaderFactory.CreateReader(stream);
-            var result = reader.AsDataSet();
-            var tables = result.Tables.Cast<DataTable>();
-            foreach (DataTable table in tables)
+            try
             {
-                dataGridView1.DataSource = table;
+
+                var stream = File.Open(path, FileMode.Open, FileAccess.Read);
+                var reader = ExcelReaderFactory.CreateReader(stream);
+                var result = reader.AsDataSet();
+                var tables = result.Tables.Cast<DataTable>();
+                foreach (DataTable table in tables)
+                {
+                    dataGridView1.DataSource = table;
+                }
+
+                lbRegistros.Text = "Linhas: " + dataGridView1.Rows.Count.ToString();
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void btnArquivo_Click(object sender, EventArgs e)
@@ -59,8 +69,51 @@ namespace ExcelDataReader
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
+            
+            int cont = 0;
+            double custo = 0;
+            string ean = "";
+            string sql = "";
+            string sql2 = "";
+            if (dataGridView1.RowCount ==0)
+            {
+                MessageBox.Show("Escolha um arquivo em excel para  atualizar!");
+                return;
+            }
+            try
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    Application.DoEvents();
+                    cont++;
 
+
+                    lbContador.Text = cont.ToString();
+                    ean = row.Cells[0].Value.ToString();
+                    custo = Convert.ToDouble(row.Cells[1].Value.ToString());
+
+                    sql = "SELECT B.FK_PRODUTO FROM PRODUTO_CODIGO_BARRA B  WHERE B.CODIGO_BARRA  = '" + ean + "'";
+                    string id = DB.Buscar(sql).Rows[0][0].ToString();
+
+                     sql2 = " UPDATE PRODUTO P  SET P.CUSTO = '" + custo.ToString("N5").Replace(",", ".") + "' WHERE P.ID = '" + id +"'";
+                    DB.ExecutarSQL(sql2);
+
+                }
+                if (cont == dataGridView1.Rows.Count)
+                    MessageBox.Show("Concluido");
+            }
+            catch (Exception ex)
+            {
+                FrmError error = new FrmError();
+                error.txtError.Text = "Linha no arquivo excel:\n\r"+ cont + "\n\rcomando 1:\n\r" +sql +"\n\rcomando 2:" +sql2+"\n\r\n\r"+ex.Message;
+                error.ShowDialog();
+              
+            }   
+           
+       
+       
         }
+     
 
         private void Form1_Load(object sender, EventArgs e)
         {

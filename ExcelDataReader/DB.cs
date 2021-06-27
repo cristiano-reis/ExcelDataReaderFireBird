@@ -1,6 +1,7 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Configuration;
+using System.Data;
 using System.Text;
 
 namespace ExcelDataReader
@@ -20,8 +21,8 @@ namespace ExcelDataReader
             Servidor = ConfigurationManager.AppSettings["Servidor"].ToString();
             Porta = ConfigurationManager.AppSettings["Porta"].ToString();
             string Usuario = "SYSDBA";
-            string Senha = "masterkey";
-
+            string Senha = "sbofutura";
+           // string Senha = "masterkey";
             return new FbConnection("User=" + Usuario + ";Password=" + Senha + ";Database=" + Caminho + ";DataSource=" + Servidor + ";Port=" + Porta);
         }
 
@@ -65,7 +66,30 @@ namespace ExcelDataReader
             }
         }
 
-       
+        public static DataTable Buscar(string sql)
+        {
+            using (FbConnection Conexao = Conectar())
+            {
+                try
+                {
+                    DataTable dt = new DataTable();
+                    Conexao.Open();
+                    FbCommand cmd = new FbCommand(sql, Conexao);
+                    FbDataAdapter da = new FbDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch (FbException ex)
+                {
+                    throw new Exception(ex.ToString());
+                }
+                finally
+                {
+                    Conexao.Dispose();
+                }
+            }
+        }
+
 
     }
 }
